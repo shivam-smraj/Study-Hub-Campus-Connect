@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Header.css';
-
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 const Header = () => {
   const { currentUser } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,12 +33,12 @@ const Header = () => {
       return (
         <>
           <span className="user-name">{currentUser.firstName}</span>
-          <a href="http://localhost:5000/api/auth/logout" className="auth-button">Logout</a>
+          <a href={`${API_BASE_URL}/api/auth/logout`} className="auth-button">Logout</a>
         </>
       );
     } else {
       return (
-        <a href="http://localhost:5000/api/auth/google" className="auth-button login">Sign in with Google</a>
+         <a href={`${API_BASE_URL}/api/auth/google`} className="auth-button login">Sign in with Google</a>
       );
     }
   };
