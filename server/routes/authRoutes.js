@@ -2,7 +2,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
 // @desc    Auth with Google
 // @route   GET /api/auth/google
 router.get('/google', passport.authenticate('google', {
@@ -12,10 +12,10 @@ router.get('/google', passport.authenticate('google', {
 // @desc    Google auth callback
 // @route   GET /api/auth/google/callback
 router.get('/google/callback', passport.authenticate('google', {
-  failureRedirect: 'http://localhost:3000/login/error' // Redirect on failure
+  failureRedirect: `${CLIENT_URL}/login/error` // Use variable
 }), (req, res) => {
   // Successful authentication, redirect to the frontend homepage.
-  res.redirect('http://localhost:3000/');
+  res.redirect(CLIENT_URL); // Use variable
 });
 
 // @desc    Get current user
@@ -38,7 +38,8 @@ router.get('/logout', (req, res, next) => {
             // Clear the cookie from the browser
             res.clearCookie('connect.sid'); 
             // Redirect to the Google logout page, which then redirects back to our app
-            res.redirect('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:3000');
+            // res.redirect('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:3000');
+            res.redirect(`https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${CLIENT_URL}`);
         });
     });
 });
