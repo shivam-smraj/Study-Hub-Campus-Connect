@@ -2,13 +2,11 @@
 import axios from 'axios';
 
 
-// IMPORTANT: Ensure axios sends cookies with every request
 axios.defaults.withCredentials = true;
-// const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://study-hub-server-e9vpxmzs8-sms-projects-3be6db74.vercel.app';
-const API_BASE_URL = 'http://localhost:5000/';
-// const API = axios.create({ baseURL: API_BASE_URL || '/api' });
+// const API_BASE_URL = 'http://localhost:5000/';
 const API = axios.create({ 
-  baseURL: process.env.REACT_APP_API_URL || '/api' 
+  baseURL: process.env.REACT_APP_API_URL || '/api',
+  withCredentials: true // <-- Explicitly add it here
 });
 
 export const fetchBranches = () => API.get('/branches');

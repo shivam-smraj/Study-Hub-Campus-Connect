@@ -46,6 +46,7 @@ app.use(cors({
   },
   credentials: true
 }));
+
 app.use(cookieParser());
 
 
@@ -57,7 +58,10 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      // --- IMPORTANT FOR PRODUCTION ---
+      secure: process.env.NODE_ENV === 'production', // Send cookie only over HTTPS
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Necessary for cross-site cookies
     }
   })
 );
@@ -67,11 +71,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // --- MOUNT ROUTERS ---
-app.use('/api', dataRoutes);
+// app.use('/api', dataRoutes);
 app.use('/api/auth', authRoutes); 
 app.use('/api/user', userRoutes); 
 app.use('/api/collections', collectionRoutes);
-app.use('/api/search', searchRoutes);
+// app.use('/api/search', searchRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.get('/', (req, res) => {
