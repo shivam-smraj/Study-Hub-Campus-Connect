@@ -73,7 +73,7 @@ app.use('/api/search', searchRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.get('/', (req, res) => {
-  res.send('API is running...  && last change was on 8 34 PM ');
+  res.send('API is running...  && last change was on 8 50 PM ');
 });
 
 const PORT = process.env.PORT || 5000;
