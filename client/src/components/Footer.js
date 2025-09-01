@@ -16,7 +16,7 @@ const Footer = () => {
                     </p>
                 </div>
                 <div className="footer-section links">
-                    <h3>Quick Links</h3>
+                    <h3>Quick Links  && last changes on 8 34 PM</h3>
                     <ul>
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="/syllabus">Syllabus</Link></li>
