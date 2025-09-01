@@ -30,8 +30,8 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow requests from our React app
-  credentials: true // Allow cookies to be sent
+  origin: ['https://your-frontend-url.vercel.app', 'http://localhost:3000'],
+  credentials: true
 }));
 app.use(cookieParser());
 

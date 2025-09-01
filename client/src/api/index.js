@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // IMPORTANT: Ensure axios sends cookies with every request
 axios.defaults.withCredentials = true;
-
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://your-backend-url.vercel.app';
 const API = axios.create({ baseURL: '/api' });
 
 export const fetchBranches = () => API.get('/branches');
