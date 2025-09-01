@@ -15,7 +15,8 @@ router.get('/google/callback', passport.authenticate('google', {
   failureRedirect: `${CLIENT_URL}/login/error` // Use variable
 }), (req, res) => {
   // Successful authentication, redirect to the frontend homepage.
-  res.redirect(CLIENT_URL); // Use variable
+  // Add a success parameter to let the frontend know auth succeeded
+  res.redirect(`${CLIENT_URL}?auth=success`); 
 });
 
 // @desc    Get current user

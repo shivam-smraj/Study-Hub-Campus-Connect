@@ -17,7 +17,9 @@ passport.use(
   new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/api/auth/google/callback',
+    callbackURL: process.env.NODE_ENV === 'production'
+      ? 'https://study-hub-server-final.vercel.app/api/auth/google/callback'
+      : '/api/auth/google/callback',
     proxy: true
   }, async (accessToken, refreshToken, profile, done) => {
     // This function is called after the user logs in with Google

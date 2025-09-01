@@ -31,7 +31,8 @@ app.use(express.json());
 
 const allowedOrigins = [
   'http://localhost:3000',
-  process.env.CLIENT_URL // This comes from your .env file
+  process.env.CLIENT_URL, // This comes from your .env file
+  'https://iiestian-study.vercel.app'
 ];
 
 app.use(cors({
@@ -39,6 +40,7 @@ app.use(cors({
     // allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) === -1) {
+      console.log(`Blocking request from origin: ${origin}`);
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
       return callback(new Error(msg), false);
     }
@@ -53,15 +55,16 @@ app.use(cookieParser());
 // --- SESSION MIDDLEWARE ---
 app.use(
   session({
-    secret: process.env.COOKIE_KEY,
+    secret: process.env.COOKIE_KEY || 'your-fallback-secret-key',
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
       // --- IMPORTANT FOR PRODUCTION ---
-      secure: process.env.NODE_ENV === 'production', // Send cookie only over HTTPS
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Necessary for cross-site cookies
+      secure: true, // Always use secure in production
+      sameSite: 'none', // Required for cross-site cookies in production
+      domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : undefined // Domain setting for production
     }
   })
 );
@@ -71,11 +74,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // --- MOUNT ROUTERS ---
-// app.use('/api', dataRoutes);
+app.use('/api', dataRoutes);
 app.use('/api/auth', authRoutes); 
 app.use('/api/user', userRoutes); 
 app.use('/api/collections', collectionRoutes);
-// app.use('/api/search', searchRoutes);
+app.use('/api/search', searchRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.get('/', (req, res) => {

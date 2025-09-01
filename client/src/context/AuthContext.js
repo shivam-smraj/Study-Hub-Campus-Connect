@@ -20,17 +20,29 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const { data: user } = await axios.get('/api/auth/current_user');
+        // Check if we have an auth=success in the URL (from redirect after successful login)
+        const urlParams = new URLSearchParams(window.location.search);
+        const authSuccess = urlParams.get('auth');
+        
+        if (authSuccess === 'success') {
+          // Remove the query parameter from URL without page reload
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+        
+        // Use the API object with the correct baseURL configuration
+        const { data: user } = await axios.get(`${process.env.REACT_APP_API_URL || 'https://study-hub-server-final.vercel.app/api'}/auth/current_user`, {
+          withCredentials: true
+        });
+        
         setCurrentUser(user);
         if (user) {
           const { data: bookmarks } = await fetchBookmarks();
           setBookmarkedFileIds(new Set(bookmarks.map(file => file._id)));
           const { data: userCollections } = await fetchCollections(); // <-- FETCH COLLECTIONS
           setCollections(userCollections); // <-- SET COLLECTIONS
-        
         }
       } catch (error) {
-        console.log("Not logged in");
+        console.log("Not logged in", error);
         setCurrentUser(null);
       } finally {
         setLoading(false);

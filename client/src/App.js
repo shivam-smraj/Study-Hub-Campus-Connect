@@ -11,7 +11,7 @@ import BookmarksPage from './pages/BookmarksPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import CollectionsPage from './pages/CollectionsPage';
 import SingleCollectionPage from './pages/SingleCollectionPage';
-// import SearchPage from './pages/SearchPage';
+import SearchPage from './pages/SearchPage';
 // import AdminRoute from './components/AdminRoute';
 // import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 // import Dashboard from './pages/admin/Dashboard';
@@ -35,7 +35,7 @@ function App() {
             <Route path="/bookmarks" element={<ProtectedRoute><BookmarksPage /></ProtectedRoute>} />
             <Route path="/collections" element={<ProtectedRoute><CollectionsPage /></ProtectedRoute>} />
             <Route path="/collections/:collectionId" element={<ProtectedRoute><SingleCollectionPage /></ProtectedRoute>} />
-            {/* <Route path="/search" element={<SearchPage />} /> */}
+            <Route path="/search" element={<SearchPage />} />
 
             {/* <Route path="/admin" element={<AdminRoute><AdminDashboardPage /></AdminRoute>}>
               <Route index element={<Dashboard />} />

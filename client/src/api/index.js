@@ -3,10 +3,10 @@ import axios from 'axios';
 
 
 axios.defaults.withCredentials = true;
-// const API_BASE_URL = 'http://localhost:5000/';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://study-hub-server-final.vercel.app/api';
 const API = axios.create({ 
-  baseURL: process.env.REACT_APP_API_URL || '/api',
-  withCredentials: true // <-- Explicitly add it here
+  baseURL: API_BASE_URL,
+  withCredentials: true
 });
 
 export const fetchBranches = () => API.get('/branches');
