@@ -1,10 +1,9 @@
-// server/config/passport-setup.js
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 
 passport.serializeUser((user, done) => {
-  done(null, user.id); // 'user.id' is the MongoDB _id
+  done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
@@ -13,24 +12,27 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+const callbackURL = process.env.NODE_ENV === 'production'
+  ? `${process.env.SERVER_URL}/api/auth/google/callback`
+  : '/api/auth/google/callback';
+
+
 passport.use(
   new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.NODE_ENV === 'production'
-      ? 'https://study-hub-server-final.vercel.app/api/auth/google/callback'
-      : '/api/auth/google/callback',
+    callbackURL: callbackURL, // Use the dynamic URL
     proxy: true
   }, async (accessToken, refreshToken, profile, done) => {
     // This function is called after the user logs in with Google
 
     // --- G SUITE DOMAIN VALIDATION ---
-    const email = profile.emails[0].value;
-    if (email.split('@')[1] !== process.env.G_SUITE_DOMAIN) {
-      // If the domain does not match, return an error
-      return done(new Error('Invalid host domain.'), null);
-    }
-    // ------------------------------------
+    // const email = profile.emails[0].value;
+    // if (email.split('@')[1] !== process.env.G_SUITE_DOMAIN) {
+    //   // If the domain does not match, return an error
+    //   return done(new Error('Invalid host domain.'), null);
+    // }
+    // // ------------------------------------
 
     try {
       // Check if user already exists in our DB

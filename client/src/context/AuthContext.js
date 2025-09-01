@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { fetchBookmarks, addBookmark as apiAddBookmark, removeBookmark as apiRemoveBookmark, fetchCollections, createCollection, addFileToCollection  } from '../api';
-
+import API from '../api';
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -30,9 +30,7 @@ export const AuthProvider = ({ children }) => {
         }
         
         // Use the API object with the correct baseURL configuration
-        const { data: user } = await axios.get(`${process.env.REACT_APP_API_URL || 'https://study-hub-server-final.vercel.app/api'}/auth/current_user`, {
-          withCredentials: true
-        });
+       const { data: user } = await API.get('/api/auth/current_user');
         
         setCurrentUser(user);
         if (user) {
