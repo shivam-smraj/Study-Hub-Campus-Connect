@@ -1,0 +1,89 @@
+/* client/src/components/AddToCollection.css */
+.add-to-collection-container {
+    position: relative; /* This is the anchor for the dropdown */
+}
+
+.btn-add-to {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-add-to:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 5px); /* Position below the button */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    width: 250px;
+    z-index: 10;
+    padding: 0.5rem 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-header {
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 0.5rem 0;
+}
+
+.dropdown-form {
+    display: flex;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.dropdown-form input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+}
+
+.dropdown-form button {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+.dropdown-feedback {
+    text-align: center;
+    padding: 0.5rem;
+    color: green;
+    font-weight: bold;
+}
+
+.btn-add-to.added {
+    background-color: #28a745; /* Green color */
+    color: white;
+    border-color: #28a745;
+}

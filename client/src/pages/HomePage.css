@@ -1,0 +1,132 @@
+/* client/src/pages/HomePage.css */
+.hero-section {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.branch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.error-message {
+  color: #d9534f;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.branch-grid {
+  display: grid;
+  /* CHANGE THIS LINE */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Add a media query for larger screens */
+@media (min-width: 1200px) {
+  .branch-grid {
+    grid-template-columns: repeat(4, 1fr); /* Force 4 columns on large screens */
+  }
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content .subtitle {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* --- FEATURES SECTION --- */
+.features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.feature-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* --- BRANCH SECTION --- */
+.branch-section {
+    padding: 3rem 0;
+}
+
+.branch-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.branch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 1200px) {
+  .branch-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.error-message {
+    color: #d9534f;
+    text-align: center;
+    font-size: 1.1rem;
+}

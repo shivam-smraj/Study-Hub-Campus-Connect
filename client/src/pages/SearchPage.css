@@ -1,0 +1,37 @@
+/* client/src/pages/SearchPage.css */
+.search-form {
+    display: flex;
+    margin-bottom: 2rem;
+}
+.search-form input {
+    flex-grow: 1;
+    font-size: 1.2rem;
+    padding: 0.75rem;
+}
+.search-form button {
+    font-size: 1.2rem;
+    padding: 0.75rem 1.5rem;
+}
+.search-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+.file-details {
+    display: flex;
+    flex-direction: column;
+}
+.file-details small {
+    color: #666;
+    margin-top: 0.25rem;
+}
+.btn-go-to {
+    background-color: #6c757d;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+}

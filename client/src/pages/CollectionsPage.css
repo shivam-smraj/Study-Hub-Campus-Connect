@@ -1,0 +1,64 @@
+/* client/src/pages/CollectionsPage.css */
+.create-collection-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.create-collection-form input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.create-collection-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.create-collection-form button:hover {
+    background-color: #218838;
+}
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.collection-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.collection-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.collection-card h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+.collection-card p {
+    margin: 0;
+    color: #666;
+}

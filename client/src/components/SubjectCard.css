@@ -1,0 +1,33 @@
+/* client/src/components/SubjectCard.css */
+.subject-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.subject-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.subject-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #282c34;
+  font-size: 1.1rem;
+}
+
+.subject-card p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  font-family: monospace;
+}
