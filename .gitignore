@@ -46,8 +46,10 @@ ehthumbs.db
 Thumbs.db
 
 # MongoDB
-data/
-*/data/
+# data/  <-- This was ignoring your client/src/data folder!
+# */data/ <-- This too!
+server/data/ 
+
 
 # Misc
 .cache/

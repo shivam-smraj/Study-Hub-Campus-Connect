@@ -1,0 +1,883 @@
+[
+  {
+    "subjectCode": "MA1101N",
+    "subjectName": "Mathematics-I",
+    "branches": [
+      "CSE", "IT", "EE", "ECE", "ME", "CE", "MET", "MIN", "ARCH", "AERO"
+    ],
+    "credits": {
+      "L": 3,
+      "T": 1,
+      "P": 0,
+      "total": 4
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "Functions of Single Real Variable: n-th order",
+        "topics": [
+          "Derivative",
+          "Leibnitz’s theorem for successive differentiation",
+          "Rolle’s theorem",
+          "M.V.T.’s of differential calculus",
+          "Taylor’s theorem with Lagrange’s and Cauchy’s forms of remainders",
+          "Taylor’s and Maclaurin’s series",
+          "Expansion of functions",
+          "Curvature",
+          "Asymptotes"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "Functions of Several Real Variables",
+        "topics": [
+          "Partial derivatives",
+          "Chain rule",
+          "Differential and small error",
+          "Euler’s theorem for homogeneous functions",
+          "Taylor’s theorem (statement only)",
+          "Expansion of functions of two real variables",
+          "Maxima and minima",
+          "Lagrange’s method of undetermined multipliers"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Infinite Series",
+        "topics": [
+          "Concept of convergence",
+          "Geometric series and p-series",
+          "Comparison test",
+          "D’Alembert’s ratio test",
+          "Cauchy’s root test",
+          "Raabe’s test",
+          "Gauss’ test",
+          "Power series",
+          "Radius of convergence"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "Multiple Integrals",
+        "topics": [
+          "Double integral",
+          "Change of order of integration",
+          "Jacobian",
+          "Change of variables",
+          "Applications"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Improper Integrals",
+        "topics": [
+          "Definition",
+          "Convergence",
+          "Cauchy’s principal value",
+          "Comparison test",
+          "u-test",
+          "Beta and Gamma functions and their properties",
+          "Relation between Gamma function and Beta function"
+        ]
+      },
+      {
+        "moduleNo": 6,
+        "title": "Ordinary Differential Equations",
+        "topics": [
+          "Higher order ordinary differential equations with constant coefficients",
+          "Euler’s equation",
+          "Method of variation of parameters",
+          "Series solution in the neighborhood of an ordinary point",
+          "Legendre differential equation",
+          "Legendre polynomials",
+          "Orthogonality property",
+          "Recurrence relations",
+          "Bessel differential equation",
+          "Bessel functions",
+          "Recurrence relations"
+        ]
+      }
+    ],
+    "textbooks": [
+      "Advanced Engineering Mathematics - E. Kreyszig, 10th edition, Wiley India Edition (2010)",
+      "Engineering Mathematics - S.S. Sastry, 4th edition, PHI learning private Ltd. (2008)",
+      "Introductory Course in Differential Equations - Daniel A. Murray, Fb & c Limited, (2018)",
+      "Differential Calculus - B.C. Das & B.N. Mukherjee, 16th edition, U. N. Dhur & sons private Ltd., (1970)",
+      "Integral Calculus - B.C. Das & B.N. Mukherjee, 44th edition, U. N. Dhur & sons private Ltd., (1996)",
+      "Advanced Calculus - D.V. Widder, 3rd edition, Prentice-Hall, Inc. (1947)"
+    ]
+  },
+  {
+    "subjectCode": "PH1101",
+    "subjectName": "Engineering Physics",
+    "branches": [
+      "CSE", "IT", "EE", "ECE"
+    ],
+    "credits": {
+      "L": 3,
+      "T": 1,
+      "P": 0,
+      "total": 4
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "Vectors",
+        "topics": [
+          "Idea of scalar and vector fields",
+          "Gradient operator",
+          "Divergence and curl of vectors",
+          "Line, surface and volume integrals of vectors",
+          "Fundamental theorem of gradient",
+          "Divergence theorem and Stokes’ theorem (statement, explanation and numerical examples, no derivation)"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "Electromagnetic Theory",
+        "topics": [
+          "Gauss’ Law",
+          "Polarization and Displacement vector",
+          "Ampere’s Circuital Law in differential form",
+          "Equation of continuity and its contradiction with Ampere’s circuital law",
+          "Displacement current",
+          "Maxwell’s Field equations",
+          "Electromagnetic wave equation and its plane wave solution in free space",
+          "Transverse nature of electromagnetic waves",
+          "Energy in an electromagnetic field",
+          "Energy flow and Poynting vector"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Oscillation and Wave",
+        "topics": [
+          "Differential equation of forced vibration and its solution in steady state (no derivation required)",
+          "Mechanical impedance",
+          "Velocity and amplitude resonance",
+          "Power in forced vibration and resonance",
+          "Half power frequency",
+          "Sharpness of resonance",
+          "Quality factor",
+          "Simple case of two coupled oscillators",
+          "Idea of normal modes and normal coordinates",
+          "Differential equation for propagation of transverse wave in a stretched string",
+          "Solution by separation of variables",
+          "Application to stretched string rigidly fixed at two ends",
+          "Formation of stationary waves",
+          "Energy of vibrating string"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "Wave Optics and LASER",
+        "topics": [
+          "Idea of coherence and Interference",
+          "Diffraction: Fresnel and Fraunhofer class",
+          "Fraunhofer single and double slit",
+          "N slit",
+          "Plane transmission grating",
+          "Missing orders",
+          "Resolving power",
+          "Polarization",
+          "Linearly, circularly and elliptically polarized light",
+          "Spontaneous and stimulated emission",
+          "Einstein’s A and B coefficients",
+          "Population inversion techniques",
+          "Three and four level systems",
+          "Optical resonator and condition for lasing action",
+          "Operation of He-Ne Laser"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Quantum Theory",
+        "topics": [
+          "Wave particle duality: Davison Germer’s experiment",
+          "Compton effect",
+          "De Broglie’s hypothesis",
+          "Wave groups",
+          "Heisenberg’s thought experiment",
+          "Uncertainty principle and its application",
+          "Wave function and its physical interpretation",
+          "The idea of operators in quantum mechanics",
+          "Time-dependent and time-independent Schrodinger’s equation",
+          "Application to free particle and particle in a one dimensional box"
+        ]
+      }
+    ],
+    "textbooks": [
+      "Murray Spiegel - Vector Analysis: Schaum’s Outline Series, McGraw Hill Education (2017)",
+      "D. P. Raychaudhuri - Advanced Acoustics, The New Book Stall, (1980)",
+      "David J. Griffiths – Introduction to Electrodynamics (4th ed.), Pearson Education India Learning Pvt. Ltd., (2015)",
+      "Ajoy Ghatak – Optics (6th ed.), McGraw Hill Education (2017)",
+      "Hecht – Optics (5th ed.), Pearson Education India Learning Pvt. Ltd., (2019)",
+      "Arthur Beiser – Concepts of Modern Physics, McGraw Hill Education (2017)",
+      "Robert Eisberg and Robert Resnick – Quantum Physics, Wiley, (2006)"
+    ]
+  },
+  {
+    "subjectCode": "Hu-1201",
+    "subjectName": "Professional Communication in English",
+    "branches": [
+      "CSE", "IT", "EE", "ECE", "ME", "CE", "MET", "MIN", "ARCH", "AERO"
+    ],
+    "credits": {
+      "L": 2,
+      "T": 1,
+      "P": 0,
+      "total": 3
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "Introduction: Elements of Grammar & Vocabulary",
+        "topics": [
+          "Parts of Speech",
+          "Subject-Verb agreement",
+          "Tenses",
+          "Voice",
+          "Synonym",
+          "Antonym",
+          "One word for a group of words",
+          "Foreign words",
+          "Error detection",
+          "Punctuation",
+          "Homonym",
+          "Homophone",
+          "Etymology of words",
+          "Idioms",
+          "Syntax"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "Elements of Oral Presentation",
+        "topics": [
+          "Individual verbal presentation",
+          "Group discussions",
+          "Mock interviews",
+          "Debating",
+          "Extempore",
+          "Interactive skills"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Elements of Composition(I)",
+        "topics": [
+          "Comprehension",
+          "Summary writing",
+          "Paragraph formulation",
+          "Enlargement",
+          "Precis writing",
+          "E-mail writing",
+          "Writing for the web"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "Elements of Composition (II)",
+        "topics": [
+          "Business letter",
+          "Cover letter and Curriculum Vitae",
+          "Writing for Promotion and Publicity",
+          "Memo writing",
+          "Note making"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Elements of Composition (III)",
+        "topics": [
+          "Technical Report Writing",
+          "Proposal framing",
+          "Writing a Research paper/Dissertation"
+        ]
+      },
+      {
+        "moduleNo": 6,
+        "title": "Linguistic & Literary Appreciation",
+        "topics": [
+          "Selection of prose and poetry dealing with topics relating to Science & technology",
+          "Environment",
+          "Human values",
+          "Aesthetic appreciation & Gender awareness"
+        ]
+      }
+    ],
+    "textbooks": [
+      "English Grammar Composition and Usage – by J.C. Nesfield",
+      "Technical Communication – by Raman & Sharma",
+      "English Skills for Technical Students W.B. State Council for Technical Education n collaboration with British Council",
+      "Communication Skills - by Sanjay Kumar and Pushp Lata",
+      "The Oxford Book of Modern Science Writing – ed by Richard Dawkins",
+      "The Oxford English Grammar – by Sidney Greenbaum",
+      "Communication Skills – by Richard Ellis"
+    ]
+  },
+  {
+    "subjectCode": "EE1101N",
+    "subjectName": "Basic Electrical Engineering",
+    "branches": [
+      "CSE", "IT", "EE", "ECE"
+    ],
+    "credits": {
+      "L": 3,
+      "T": 0,
+      "P": 0,
+      "total": 3
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "DC Circuits",
+        "topics": [
+          "Introduction (Node, branch, active & passive elements, linear and non-linear circuits, unilateral and bilateral network)",
+          "Kirchhoff's laws",
+          "Maxwell's loop current method",
+          "Nodal method",
+          "Star-delta transformation",
+          "Network theorems: Superposition theorem, Thevenin's theorem, Maximum power transfer theorem"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "Measuring Instruments",
+        "topics": [
+          "Common Electrical Laboratory Instruments (Ammeter, Voltmeter, Wattmeter)",
+          "Classifications of measuring instruments",
+          "Mention of Digital meters"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Magnetics",
+        "topics": [
+          "Magnetic quantities",
+          "B-H curve",
+          "Calculation on magnetic circuits",
+          "Analogy with electric circuit",
+          "Iron losses"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "DC Machines",
+        "topics": [
+          "Construction",
+          "Types",
+          "Operating principles (motoring and generating modes)",
+          "Ratings",
+          "Speed control methods",
+          "Applications"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Transformers",
+        "topics": [
+          "Construction",
+          "Types",
+          "Ratings",
+          "Operating principle",
+          "EMF equation",
+          "Concept of losses",
+          "Efficiency",
+          "Mention of three-phase transformers"
+        ]
+      },
+      {
+        "moduleNo": 6,
+        "title": "AC Fundamentals",
+        "topics": [
+          "Introduction",
+          "Sinusoidal and non-sinusoidal quantities",
+          "Phase and phase difference",
+          "Average and RMS values",
+          "Form factor and peak factor",
+          "Concept of phasor diagram",
+          "Impedance and admittance",
+          "Power and power factor"
+        ]
+      },
+      {
+        "moduleNo": 7,
+        "title": "AC Circuits: Single-Phase & Three-Phase Balanced System",
+        "topics": [
+          "Single-Phase: V-I relationship in R-L-C circuit, series and parallel R-L-C circuit",
+          "Phasor diagrams",
+          "Apparent, active and reactive power",
+          "Resonance in electrical circuit",
+          "Three-Phase-Balanced system: star and delta connections",
+          "Phase and line quantities and their relationships"
+        ]
+      },
+      {
+        "moduleNo": 8,
+        "title": "Generation, Transmission and Distribution of Electricity",
+        "topics": [
+          "General structure of an Electrical Power System",
+          "Domestic Supply System",
+          "Switch Fuse Unit",
+          "MCB and Earthing"
+        ]
+      },
+      {
+        "moduleNo": 9,
+        "title": "Three-phase Induction Machines",
+        "topics": [
+          "Construction",
+          "Types",
+          "Ratings",
+          "Operating principle",
+          "Slip",
+          "Slip frequency",
+          "Torque-slip characteristics"
+        ]
+      }
+    ],
+    "textbooks": [
+      "Electrical Engineering Fundamentals by Del Toro, 1972, Prentice-Hall",
+      "Advanced Electrical Technology by H. Cotton, 1990, Reem Publications (P) Ltd",
+      "Electrical and Electronic Technology by Hughes, 2005, Pearson Prentice Hall",
+      "Electric Circuits by J. Edminister and M. Nahvi, 2005, McGraw-Hill",
+      "http://ntpl.iitm.ac.in/course/Webcourse-contents/IIT%20kharagpur/Basic%20Technology/New_index1.html"
+    ]
+  },
+  {
+    "subjectCode": "MM1101N",
+    "subjectName": "Engineering Materials",
+    "branches": [
+      "ME", "CE", "MET", "MIN"
+    ],
+    "credits": {
+      "L": 3,
+      "T": 0,
+      "P": 0,
+      "total": 3
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "Introduction",
+        "topics": [
+          "Classification of materials",
+          "Physical properties of materials",
+          "Testing of materials: mechanical and electrical properties"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "Ceramics, Polymers, and Composites",
+        "topics": [
+          "Ceramic materials: Structure and general properties of glasses and ceramics, Forming and Shaping of Ceramics and Glasses",
+          "Techniques for Strengthening and Annealing Glass",
+          "Polymer materials: Structure, General Properties and Applications, Processing of polymers",
+          "Composite materials: Classification, Areas of application of composite materials, Methods of manufacturing composites"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Processing of metals and alloys",
+        "topics": [
+          "Metal casting technologies: A brief introduction to the casting of metals and alloys, classification of casting processes, basics of sand casting",
+          "Metal Forming and Shaping Processes: Rolling, Open die forging, Forgeability of metals"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "Surface Treatment and degradation of materials",
+        "topics": [
+          "Mechanical plating and cladding",
+          "Case hardening",
+          "Thermal Spraying",
+          "Vapour deposition",
+          "Electroplating",
+          "Types of corrosion",
+          "Methods to control corrosion: coatings, inhibitors, cathodic protection",
+          "Corrosion testing: Immersion test and salt-spray test"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Materials for Structural Applications",
+        "topics": [
+          "Introduction",
+          "Categories of structural materials",
+          "Strategies of selection of materials and processes for structural applications"
+        ]
+      },
+      {
+        "moduleNo": 6,
+        "title": "Materials for transportation",
+        "topics": [
+          "Categories of materials used in the automobile, railway and aerospace industries",
+          "Strategies of selection of materials and processes for applications in the transportation industry"
+        ]
+      },
+      {
+        "moduleNo": 7,
+        "title": "Electronic Materials",
+        "topics": [
+          "Overview and definitions",
+          "Categories of electronic materials used in the semiconductor industry",
+          "Manufacturing processes of electronic materials: Crystal growing and wafer preparation, Film deposition, Oxidation, Lithography, Etching"
+        ]
+      },
+      {
+        "moduleNo": 8,
+        "title": "Materials for Biomedical Applications",
+        "topics": [
+          "Metallic, ceramic and polymeric biomaterials",
+          "Materials for tissue engineering"
+        ]
+      }
+    ],
+    "textbooks": [
+      "Manufacturing Engineering and technology, S. Kalpakjian, S. R. Schmid, K. S. Vijay Sekar, Pearson",
+      "Materials Science and Engineering, William D. Callister, Jr. Wiley India (P) Ltd.",
+      "Materials Science and Engineering: A First Course, V. Raghavan, Prentice Hall India Learning Private Limited"
+    ]
+  },
+  {
+    "subjectCode": "CH1101/CH1201",
+    "subjectName": "Engineering Chemistry Theory",
+    "branches": [
+      "ME", "CE", "MET", "MIN"
+    ],
+    "credits": {
+      "L": 3,
+      "T": 0,
+      "P": 0,
+      "total": 3
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "Aromaticity",
+        "topics": [
+          "Aromatic, Non-aromatic, and Antiaromatic Compounds"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "UV-VIS and IR Spectroscopy",
+        "topics": [
+          "UV-VIS spectroscopy: Introduction, Beer–Lambert’s law and applications, instrumentation, classification of electronic transitions, chromophores, substituent effects, effect of conjugation, empirical rule for calculation of λmax",
+          "IR spectroscopy: theory and applications, Hooke’s Law, vibration modes, stretching frequencies of some important functional groups, various electronic effects for different stretching frequencies value"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Polymer Chemistry and Composites",
+        "topics": [
+          "Basics of Polymer Chemistry",
+          "Classification",
+          "Properties (thermosetting and thermoplastics)",
+          "Tacticity",
+          "Types of polymerization mechanisms",
+          "Molecular weight of polymer",
+          "Conducting polymers",
+          "Flame retardant polymers",
+          "Dental polymers",
+          "Composite materials",
+          "Rubbers"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "Photochemistry and Applications",
+        "topics": [
+          "Introduction to photochemistry",
+          "Jablonski diagram",
+          "Fluorescence",
+          "Phosphorescence",
+          "Applications of photochemistry",
+          "Light emitting diodes (LED)"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Synthesis of selected bio-active molecules",
+        "topics": [
+          "Ibuprofen",
+          "Naproxen",
+          "Paracetamol",
+          "Metronidazole",
+          "Fluconazole",
+          "Coumarin",
+          "Jasmone"
+        ]
+      },
+      {
+        "moduleNo": 6,
+        "title": "Coordination Chemistry",
+        "topics": [
+          "Crystal Field Theory",
+          "d-orbital splitting in Octahedral and tetrahedral ligand field",
+          "CFSE",
+          "Jahn-Teller distortion",
+          "Factors influencing magnitude of crystal field splitting",
+          "Spectrochemical Series",
+          "Colour and magnetic properties of complexes",
+          "Introduction to LFT",
+          "Applications of coordination compounds in medicine: platinum containing anticancer drugs (structure and function)"
+        ]
+      },
+      {
+        "moduleNo": 7,
+        "title": "Organometallic Chemistry and Catalysis",
+        "topics": [
+          "EAN rule - 16 & 18 electron rule and its applications",
+          "Organometallic complexes and concept of Homogeneous Catalysis",
+          "Hydroformylation",
+          "Wilkinson catalysis",
+          "Ziegler-Natta catalysis",
+          "Heterogeneous Catalysis",
+          "Catalysis for sustainable energy generation"
+        ]
+      },
+      {
+        "moduleNo": 8,
+        "title": "Thermodynamics",
+        "topics": [
+          "Carnot Engine",
+          "Second law of thermodynamics",
+          "Third Law of Thermodynamics",
+          "Entropy change accompanying various processes",
+          "Gibbs energy",
+          "Gibbs Helmholtz equation",
+          "Chemical potential",
+          "Criteria of spontaneity",
+          "Applications of thermodynamics in phase equilibrium (one- and two-component systems)",
+          "Clapeyron and Clausius-Clapeyron equations"
+        ]
+      },
+      {
+        "moduleNo": 9,
+        "title": "Electrochemistry",
+        "topics": [
+          "Conduction in solution",
+          "Electromotive force",
+          "Different type of electrodes",
+          "Nernst equation",
+          "Relationship between thermodynamic properties and EMF of a cell",
+          "Battery",
+          "Fuel cell",
+          "Photovoltaic cell",
+          "Corrosion",
+          "Corrosion Control"
+        ]
+      }
+    ],
+    "textbooks": [
+      "Organic Chemistry, Volume 1, I L Finar",
+      "Organic Chemistry, J. Clayden, N. Greeves, S. Warren, P. Wother, Oxford University Press, 2000",
+      "D. L. Pavia, G. M. Lampman, G. S. Kriz, J. A. Vyvyan, Introduction to Spectroscopy, 5th Edition, Cengage Learning, 2013",
+      "W. Kemp, Organic Spectroscopy, 3rd Edition, Macmillan, 2019",
+      "C. N. Banwell, and E. M. McCash, Fundamentals of Molecular Spectroscopy, 4th Ed., Tata McGraw-Hill, 1962",
+      "F.W. Billmayer, Textbook of Polymer Chemistry, 3rd Edition, Wiley, 2007",
+      "Principles of Polymer Chemistry - Paul J. Flory",
+      "Principles of polymerization, George G. Odian, 4th Edn, John Wiley & Sons, Inc., Publication, 2004",
+      "Conducting Polymers: A New Era in Electrochemistry, György Inzelt",
+      "Organic Photochemistry – J. Coxon & B. Halton",
+      "Halton Introductory Photochemistry – A. Cox & T. Camp",
+      "K.K. Rohatgi-Mukherjee, Fundamentals of Photochemistry, 3rd Edition, New Age International Publishers, 2017",
+      "Shriver Atkin’s Inorganic Chemistry by P. Atkins, T. Overton, J. Rourke, M. Weller, M. Armstrong, 5th Edn, Oxford University Press, 2009",
+      "Inorganic Chemistry by C.E. Housecroft, A. G. Sharpe, 4th Edn, Pearson Education, 2017",
+      "Advanced Inorganic Chemistry by Cotton, Wilkinson, Murillo, Bochmann, 6th Edn, Wiley, 2007",
+      "Physical Chemistry by G. W. Castellan",
+      "Atkins' Physical Chemistry by Peter Atkins and Julio de Paula",
+      "Heat and Thermodynamics by Mark W. Zemansky and Richard H. Dittman",
+      "Thermodynamics for Chemists by Samuel Glasstone",
+      "Molecular Thermodynamics by Donald A. McQuarrie and John Douglas Simon"
+    ]
+  },
+  {
+    "subjectCode": "Basic Electronics",
+    "subjectName": "Basic Electronics",
+    "branches": [
+      "CSE", "IT", "EE", "ECE"
+    ],
+    "credits": {
+      "L": 3,
+      "T": 0,
+      "P": 0,
+      "total": 3
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "Module 1",
+        "topics": [
+          "Electron as a classical particle, concept of electron-hole pair: generation and recombination",
+          "E-B diagram for defining and classifying conductor, semiconductor and insulator"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "Module 2",
+        "topics": [
+          "Type of semiconductors, concept of doping",
+          "Fermi-Dirac and Maxwell-Boltzmann statistics",
+          "Concept of Fermi level",
+          "Relations determining Fermi-level and carrier concentration in conductors and semiconductors"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Module 3",
+        "topics": [
+          "Introduction to E-K diagrams",
+          "Concept of effective mass",
+          "Use of E-K diagram in classifying semiconductors",
+          "Concept of photons and phonons",
+          "Direct and indirect band gap semiconductors",
+          "Degenerate and non degenerate semiconductors",
+          "Velocity saturation in semiconductors"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "Module 4",
+        "topics": [
+          "P-N junction",
+          "Drift and diffusion phenomenon",
+          "Diffusion potential",
+          "Depletion region & approximation",
+          "Result of forward and reverse biasing"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Module 5",
+        "topics": [
+          "Semiconductor diode circuits: static and dynamic characteristic, transfer characteristic",
+          "Piecewise liner diode model",
+          "Clipping and clamping circuits",
+          "Half-wave, full-wave and bridge rectifiers",
+          "Capacitor filters"
+        ]
+      },
+      {
+        "moduleNo": 6,
+        "title": "Bipolar junction transistors",
+        "topics": [
+          "Structures, current components",
+          "Ebers-Moll model, large signal current gains",
+          "Operating modes, CB, CE and CC configurations and characteristics",
+          "Dependence of Beta on various parameters"
+        ]
+      },
+      {
+        "moduleNo": 7,
+        "title": "Transistor biasing",
+        "topics": [
+          "Base bias, collector bias, emitter bias",
+          "Stability factor",
+          "Thermal runway and bias compensation",
+          "BJT as a switch",
+          "BJT at low frequencies: small signal amplifier, h parameter models",
+          "Analysis of single stage amplifiers using h parameter"
+        ]
+      }
+    ],
+    "textbooks": []
+  },
+  {
+    "subjectCode": "CE1101N",
+    "subjectName": "Environment and Climate Change",
+    "branches": [
+      "CSE", "IT", "EE", "ECE", "ME", "CE", "MET", "MIN", "ARCH", "AERO"
+    ],
+    "credits": {
+      "L": null,
+      "T": null,
+      "P": null,
+      "total": null
+    },
+    "syllabus": [
+      {
+        "moduleNo": 1,
+        "title": "Scope and importance",
+        "topics": [
+          "Concept of sustainability and sustainable development"
+        ]
+      },
+      {
+        "moduleNo": 2,
+        "title": "Energy Resources",
+        "topics": [
+          "Different forms of energy, energy demand and supply",
+          "Energy reserve and resources",
+          "Future demand of energy",
+          "Effect of energy on the environment and ecology",
+          "Necessity for the sustainability of clean energy sources"
+        ]
+      },
+      {
+        "moduleNo": 3,
+        "title": "Fossil fuels and conventional energy sources",
+        "topics": [
+          "Coal, oil, natural gas",
+          "Extraction methods"
+        ]
+      },
+      {
+        "moduleNo": 4,
+        "title": "Renewable energy technologies",
+        "topics": [
+          "Solar Energy, Wind Energy, Biomass energy, Geothermal energy, Small hydro energy, Ocean-tidal-wave energy"
+        ]
+      },
+      {
+        "moduleNo": 5,
+        "title": "Ecology",
+        "topics": [
+          "Ecosystem and its components, ecosystem functions",
+          "Anthropogenic impact on aquatic and terrestrial ecosystems",
+          "Levels of biological diversity: genetic, species and ecosystem diversity",
+          "Threats to biodiversity: Habitat loss, poaching of wildlife, man-wildlife conflicts, biological invasions",
+          "Impact of biodiversity loss on the animal world"
+        ]
+      },
+      {
+        "moduleNo": 6,
+        "title": "Conservation of biodiversity",
+        "topics": [
+          "In-situ and Ex-situ conservation of biodiversity",
+          "Ecosystem and biodiversity services: Ecological, economic, social, ethical, aesthetic and informational value"
+        ]
+      },
+      {
+        "moduleNo": 7,
+        "title": "Environmental pollution",
+        "topics": [
+          "Types, causes, effects, and controls",
+          "Air, water, soil, and noise pollution",
+          "Solid and hazardous waste management: Control measures of urban and industrial waste",
+          "Pollution case studies"
+        ]
+      },
+      {
+        "moduleNo": 8,
+        "title": "Environmental management",
+        "topics": [
+          "Environmental impact assessment",
+          "Life cycle analysis",
+          "Pollution control acts"
+        ]
+      },
+      {
+        "moduleNo": 9,
+        "title": "Climate Change",
+        "topics": [
+          "General overview of the climate change problem and impacts on societies and ecosystems",
+          "Overview of different aspects involved in climate change impact investigation"
+        ]
+      }
+    ],
+    "textbooks": []
+  }
+]
