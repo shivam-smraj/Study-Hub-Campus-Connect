@@ -12,10 +12,10 @@ router.get('/google', passport.authenticate('google', {
 // @desc    Google auth callback
 // @route   GET /api/auth/google/callback
 router.get('/google/callback', passport.authenticate('google', {
-  failureRedirect: 'http://localhost:3000/login/error' // Redirect on failure
+  failureRedirect: `${process.env.CLIENT_URL}/login/error` // Redirect on failure
 }), (req, res) => {
   // Successful authentication, redirect to the frontend homepage.
-  res.redirect('http://localhost:3000/');
+  res.redirect(`${process.env.CLIENT_URL}/`);
 });
 
 // @desc    Get current user
@@ -38,7 +38,7 @@ router.get('/logout', (req, res, next) => {
             // Clear the cookie from the browser
             res.clearCookie('connect.sid'); 
             // Redirect to the Google logout page, which then redirects back to our app
-            res.redirect('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:3000');
+            res.redirect(`https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${process.env.CLIENT_URL}`);
         });
     });
 });
