@@ -1,44 +1,55 @@
 // client/src/pages/CollectionsPage.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchCollections, createCollection } from '../api';
+import { fetchCollections, createCollection, deleteCollection } from '../api';
 import Spinner from '../components/Spinner';
 import './CollectionsPage.css';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { TrashIcon } from '../components/Icons';
 
 const CollectionsPage = () => {
-    const [collections, setCollections] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [newCollectionName, setNewCollectionName] = useState('');
+    const queryClient = useQueryClient();
 
-    useEffect(() => {
-        const getCollections = async () => {
-            try {
-                setLoading(true);
-                const { data } = await fetchCollections();
-                setCollections(data);
-                setError(null);
-            } catch (err) {
-                console.error("Failed to fetch collections:", err);
-                setError("Could not load your collections.");
-            } finally {
-                setLoading(false);
-            }
-        };
-        getCollections();
-    }, []);
+    const { data: collections, isLoading: loading, error } = useQuery({
+        queryKey: ['collections'],
+        queryFn: () => fetchCollections().then(res => res.data),
+    });
 
-    const handleCreateCollection = async (e) => {
+    const createMutation = useMutation({
+        mutationFn: createCollection,
+        onSuccess: () => {
+            toast.success('Collection created!');
+            setNewCollectionName('');
+            queryClient.invalidateQueries(['collections']);
+        },
+        onError: () => {
+            toast.error('Failed to create collection.');
+        }
+    });
+
+    const deleteMutation = useMutation({
+        mutationFn: deleteCollection,
+        onSuccess: () => {
+            toast.success('Collection deleted!');
+            queryClient.invalidateQueries(['collections']);
+        },
+        onError: () => {
+            toast.error('Failed to delete collection.');
+        }
+    });
+
+    const handleCreateCollection = (e) => {
         e.preventDefault();
         if (!newCollectionName.trim()) return;
+        createMutation.mutate(newCollectionName);
+    };
 
-        try {
-            const { data: newCollection } = await createCollection(newCollectionName);
-            setCollections([newCollection, ...collections]); // Add new collection to the top
-            setNewCollectionName(''); // Clear the input field
-        } catch (err) {
-            console.error("Failed to create collection:", err);
-            alert("Could not create the collection. Please try again.");
+    const handleDeleteCollection = (e, id) => {
+        e.preventDefault(); // Prevent navigation
+        if (window.confirm('Are you sure you want to delete this collection?')) {
+            deleteMutation.mutate(id);
         }
     };
 
@@ -56,19 +67,30 @@ const CollectionsPage = () => {
                     onChange={(e) => setNewCollectionName(e.target.value)}
                     placeholder="New collection name..."
                 />
-                <button type="submit">Create</button>
+                <button type="submit" disabled={createMutation.isPending}>
+                    {createMutation.isPending ? 'Creating...' : 'Create'}
+                </button>
             </form>
 
             {loading && <Spinner />}
-            {error && <p className="error-message">{error}</p>}
+            {error && <p className="error-message">Could not load your collections.</p>}
             
             {!loading && !error && (
                 <div className="collections-grid">
-                    {collections.length > 0 ? (
+                    {collections?.length > 0 ? (
                         collections.map(collection => (
                             <Link key={collection._id} to={`/collections/${collection._id}`} className="collection-card">
-                                <h3>{collection.name}</h3>
-                                <p>{collection.files.length} item(s)</p>
+                                <div className="collection-info">
+                                    <h3>{collection.name}</h3>
+                                    <p>{collection.files.length} item(s)</p>
+                                </div>
+                                <button 
+                                    className="delete-collection-btn"
+                                    onClick={(e) => handleDeleteCollection(e, collection._id)}
+                                    title="Delete Collection"
+                                >
+                                    <TrashIcon className="icon" />
+                                </button>
                             </Link>
                         ))
                     ) : (

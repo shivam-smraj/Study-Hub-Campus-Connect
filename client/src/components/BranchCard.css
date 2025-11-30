@@ -1,27 +1,29 @@
 /* client/src/components/BranchCard.css */
 .branch-card {
-  background-color: white;
+  background-color: var(--bg-secondary);
   border-radius: 8px;
   padding: 1.5rem;
   text-align: center;
   text-decoration: none;
-  color: #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--border-color);
 }
 
 .branch-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px Arem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-color);
 }
 
 .branch-card h3 {
   margin: 0 0 0.5rem 0;
-  color: #282c34;
+  color: var(--text-primary);
 }
 
 .branch-card p {
   margin: 0;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }

@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 // IMPORTANT: This should match the email in your server's .env file
-const ADMIN_EMAIL = 'your.admin.email@yourcollege.edu.in'; 
+const ADMIN_EMAIL = process.env.REACT_APP_ADMIN_EMAIL; 
 
 const AdminRoute = ({ children }) => {
   const { currentUser, loading } = useAuth();

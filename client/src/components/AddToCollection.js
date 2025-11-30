@@ -1,40 +1,23 @@
-// client/src/components/AddToCollection.js
 import React, { useState, useEffect, useRef } from 'react';
-import { fetchCollections } from '../api'; // keep only used imports
 import './AddToCollection.css';
 import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
+import { PlusIcon } from './Icons';
 
-const AddToCollection = ({ fileId }) => {
+const AddToCollection = ({ fileId, minimal }) => {
   const {
+    collections, // Use collections from context
     isFileInAnyCollection,
     createAndAddFileToCollection,
     addFileToExistingCollection
   } = useAuth();
 
-  const [collections, setCollections] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
-  const [feedback, setFeedback] = useState('');
   const containerRef = useRef(null);
-  const timeoutRef = useRef(null);
 
   // toggle dropdown
   const onToggle = () => setIsOpen(prev => !prev);
-
-  // fetch collections when dropdown opens
-  useEffect(() => {
-    let mounted = true;
-    const getCollections = async () => {
-      try {
-        const { data } = await fetchCollections();
-        if (mounted) setCollections(data || []);
-      } catch (error) {
-        console.error('Could not fetch collections', error);
-      }
-    };
-    if (isOpen) getCollections();
-    return () => { mounted = false; };
-  }, [isOpen]);
 
   // close when clicking outside
   useEffect(() => {
@@ -48,31 +31,16 @@ const AddToCollection = ({ fileId }) => {
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, [isOpen]);
 
-  // cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  const showFeedback = (message) => {
-    setFeedback(message);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setFeedback('');
-      setIsOpen(false); // close dropdown after feedback
-    }, 1500);
-  };
-
   const handleAddFile = async (collectionId, e) => {
     // stop propagation to prevent accidental outside handlers
     if (e && e.stopPropagation) e.stopPropagation();
     try {
       await addFileToExistingCollection(collectionId, fileId);
-      showFeedback('Added!');
+      toast.success('Added to collection!');
+      setIsOpen(false);
     } catch (error) {
       console.error('Could not add file to collection', error);
-      showFeedback('Error!');
+      toast.error('Failed to add file.');
     }
   };
 
@@ -82,16 +50,12 @@ const AddToCollection = ({ fileId }) => {
     if (!newCollectionName.trim()) return;
     try {
       await createAndAddFileToCollection(newCollectionName.trim(), fileId);
-      showFeedback('Added!');
+      toast.success('Collection created and file added!');
       setNewCollectionName('');
-      // Optionally refetch collections so the new collection shows up
-      try {
-        const { data } = await fetchCollections();
-        setCollections(data || []);
-      } catch (_) { /* ignore */ }
+      setIsOpen(false);
     } catch (error) {
       console.error('Could not create and add to collection', error);
-      showFeedback('Error!');
+      toast.error('Failed to create collection.');
     }
   };
 
@@ -100,13 +64,13 @@ const AddToCollection = ({ fileId }) => {
   return (
     <div className="add-to-collection-container" ref={containerRef}>
       <button
-        className={`btn-add-to ${fileIsInCollection ? 'added' : ''}`}
+        className={`action-btn add-collection-btn ${fileIsInCollection ? 'active' : ''}`}
         onClick={onToggle}
         title={fileIsInCollection ? 'In a collection' : 'Add to collection'}
         aria-expanded={isOpen}
         aria-label="Add to collection"
       >
-        {fileIsInCollection ? '✔' : '+'}
+        <PlusIcon className="icon" />
       </button>
 
       {isOpen && (
@@ -140,8 +104,6 @@ const AddToCollection = ({ fileId }) => {
             />
             <button type="submit">+</button>
           </form>
-
-          {feedback && <div className="dropdown-feedback">{feedback}</div>}
         </div>
       )}
     </div>

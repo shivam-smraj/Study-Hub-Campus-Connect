@@ -1,6 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const helmet = require('helmet');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
 const dataRoutes = require('./routes/dataRoutes');
 const mongoose = require('mongoose');
@@ -26,6 +29,19 @@ require('./config/passport-setup'); // <-- IMPORTANT: This runs the passport con
 // const authRoutes = require('./routes/authRoutes'); 
 
 const app = express();
+
+// --- SECURITY & PERFORMANCE MIDDLEWARE ---
+app.use(helmet()); // Set security HTTP headers
+app.use(compression()); // Compress all responses
+
+// Rate limiting: 100 requests per 15 minutes
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use('/api', limiter);
 
 app.use(express.json());
 

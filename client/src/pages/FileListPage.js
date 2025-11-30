@@ -1,58 +1,51 @@
 // client/src/pages/FileListPage.js
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchFilesBySubject } from '../api';
+import { fetchFilesBySubject, fetchSubjectDetails } from '../api';
 import Accordion from '../components/Accordion';
+import Spinner from '../components/Spinner';
+import { useQuery } from '@tanstack/react-query';
 
 const FileListPage = () => {
-  const { subjectId } = useParams();
-  const [groupedFiles, setGroupedFiles] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { subjectSlug } = useParams();
 
-  useEffect(() => {
-    const getFiles = async () => {
-      try {
-        setLoading(true);
-        const { data } = await fetchFilesBySubject(subjectId);
+  // Fetch subject details to get the name
+  const { data: subject } = useQuery({
+      queryKey: ['subject', subjectSlug],
+      queryFn: () => fetchSubjectDetails(subjectSlug).then(res => res.data),
+      staleTime: 1000 * 60 * 60,
+  });
 
-        // This is the grouping logic
-        const groups = data.reduce((acc, file) => {
-          // Extracts the subfolder path, e.g., "Notes" or "Notes/Unit 1"
-          const pathParts = file.relativePath.split('/');
-          // We take the top-level folder name (the subject) out of the path
-          const subfolderPath = pathParts.slice(1, -1).join('/') || 'Root';
-          
-          if (!acc[subfolderPath]) {
-            acc[subfolderPath] = [];
-          }
-          acc[subfolderPath].push(file);
-          return acc;
-        }, {});
-
-        setGroupedFiles(groups);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to fetch files:", err);
-        setError("Failed to load files. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getFiles();
-  }, [subjectId]);
+  const { data: groupedFiles, isLoading: loading, error } = useQuery({
+    queryKey: ['files', subjectSlug],
+    queryFn: async () => {
+      const { data } = await fetchFilesBySubject(subjectSlug);
+      // Grouping logic
+      return data.reduce((acc, file) => {
+        const pathParts = file.relativePath.split('/');
+        const subfolderPath = pathParts.slice(1, -1).join('/') || 'Root';
+        if (!acc[subfolderPath]) {
+          acc[subfolderPath] = [];
+        }
+        acc[subfolderPath].push(file);
+        return acc;
+      }, {});
+    },
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+  });
 
   return (
     <div className="file-list-page">
        <div className="breadcrumb">
-        <Link to="/">Home</Link> / <span>Files</span>
+        <Link to="/">Home</Link> / <span>{subject ? subject.name : 'Files'}</span>
       </div>
       
-      {loading && <p>Loading files...</p>}
-      {error && <p className="error-message">{error}</p>}
+      <h1>{subject ? `${subject.name} (${subject.courseCode})` : 'Files'}</h1>
 
-      {!loading && !error && Object.keys(groupedFiles).length > 0 ? (
+      {loading && <Spinner />}
+      {error && <p className="error-message">Failed to load files. Please try again.</p>}
+
+      {!loading && !error && groupedFiles && Object.keys(groupedFiles).length > 0 ? (
         Object.entries(groupedFiles).map(([groupName, files]) => (
           <Accordion key={groupName} title={groupName} files={files} />
         ))

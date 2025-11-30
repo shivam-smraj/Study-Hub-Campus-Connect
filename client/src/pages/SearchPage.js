@@ -1,39 +1,22 @@
 // client/src/pages/SearchPage.js
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import { searchFiles } from '../api';
-import FileListItem from '../components/FileListItem';
 import Spinner from '../components/Spinner';
 import './SearchPage.css';
+import { useQuery } from '@tanstack/react-query';
 
 const SearchPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [results, setResults] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
+    const query = searchParams.get('q') || '';
+    const [searchTerm, setSearchTerm] = useState(query);
 
-    useEffect(() => {
-        const query = searchParams.get('q');
-        if (query) {
-            const performSearch = async () => {
-                try {
-                    setLoading(true);
-                    setError(null);
-                    const { data } = await searchFiles(query);
-                    setResults(data);
-                } catch (err) {
-                    setError('An error occurred while searching.');
-                    console.error(err);
-                } finally {
-                    setLoading(false);
-                }
-            };
-            performSearch();
-        } else {
-            setResults([]); // Clear results if query is empty
-        }
-    }, [searchParams]);
+    const { data: results, isLoading: loading, error } = useQuery({
+        queryKey: ['search', query],
+        queryFn: () => searchFiles(query).then(res => res.data),
+        enabled: !!query, // Only run if query exists
+        staleTime: 1000 * 60 * 5,
+    });
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -55,24 +38,23 @@ const SearchPage = () => {
 
             <div className="search-results">
                 {loading && <Spinner />}
-                {error && <p className="error-message">{error}</p>}
+                {error && <p className="error-message">An error occurred while searching.</p>}
                 {!loading && !error && (
-                    searchParams.get('q') ? (
-                        results.length > 0 ? (
+                    query ? (
+                        results && results.length > 0 ? (
                             results.map(file => (
-                                // We need to create a simple FileListItem-like component for search results
                                 <div key={file._id} className="search-result-item">
                                     <div className="file-details">
                                         <strong>{file.fileName}</strong>
-                                        <small>{file.subjectDetails.name} / {file.branchDetails[0]?.name}</small>
+                                        <small>{file.subjectDetails?.name} / {file.branchDetails?.[0]?.name}</small>
                                     </div>
                                     <div className="file-actions">
-                                        <a href={`/subject/${file.subjectDetails._id}`} className="btn-go-to">Go to Subject</a>
+                                        <Link to={`/subject/${file.subjectDetails?.slug}`} className="btn-go-to">Go to Subject</Link>
                                     </div>
                                 </div>
                             ))
                         ) : (
-                            <p>No results found for "{searchParams.get('q')}".</p>
+                            <p>No results found for "{query}".</p>
                         )
                     ) : (
                         <p>Enter a term above to search for materials.</p>

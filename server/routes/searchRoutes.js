@@ -38,6 +38,22 @@ router.get('/', async (req, res) => { // Route is now just '/' relative to where
                     as: 'branchDetails'
                 }
             },
+            {
+                $project: {
+                    fileName: 1,
+                    fileType: 1,
+                    fileSize: 1,
+                    fileUrl: 1,
+                    driveFileId: 1,
+                    relativePath: 1,
+                    likes: 1,
+                    slug: 1,
+                    'subjectDetails.name': 1,
+                    'subjectDetails._id': 1,
+                    'subjectDetails.slug': 1,
+                    'branchDetails.name': 1
+                }
+            }
         ];
 
         if (mongoose.Types.ObjectId.isValid(branch)) {

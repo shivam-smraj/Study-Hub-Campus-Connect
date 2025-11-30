@@ -83,6 +83,25 @@ router.put('/:id/add-file', isLoggedIn, async (req, res) => {
     }
 });
 
-// We can add routes for renaming, deleting, and removing files later as needed.
+// @desc    Delete a collection
+// @route   DELETE /api/collections/:id
+router.delete('/:id', isLoggedIn, async (req, res) => {
+    try {
+        const collection = await Collection.findById(req.params.id);
+
+        if (!collection) return res.status(404).json({ message: 'Collection not found' });
+        if (collection.creator.toString() !== req.user._id.toString()) return res.status(403).json({ message: 'User not authorized' });
+
+        await Collection.findByIdAndDelete(req.params.id);
+        
+        // Remove from user's collection list
+        await User.findByIdAndUpdate(req.user._id, { $pull: { collections: req.params.id } });
+
+        res.json({ message: 'Collection removed' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
+    }
+});
 
 module.exports = router;

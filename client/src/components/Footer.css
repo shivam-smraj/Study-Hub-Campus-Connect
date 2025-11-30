@@ -1,65 +1,144 @@
 /* client/src/components/Footer.css */
 .app-footer {
-    background-color: #343a40;
-    color: #adb5bd;
-    padding-top: 2rem;
-    margin-top: 3rem; /* Add space above the footer */
-    border-top: 3px solid #007bff;
+    background-color: #0b1120; /* Darker than main bg */
+    color: var(--text-secondary);
+    padding-top: 1.5rem;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+}
+
+/* Modern gradient top border effect */
+.app-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    opacity: 0.5;
 }
 
 .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 0.8fr;
     gap: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-align: left;
 }
 
 .footer-section {
-    flex: 1;
-    min-width: 250px; /* Ensures columns wrap nicely on smaller screens */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .footer-section h3 {
-    color: white;
-    margin-bottom: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
 }
 
+/* Brand Section */
 .footer-section.about .logo-text {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #61dafb; /* Match the header logo color */
+    font-size: 1.25rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-color) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    opacity: 1;
 }
 
 .footer-section p {
-    line-height: 1.6;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    max-width: 350px;
+    color: var(--text-secondary);
 }
 
+/* Links Section */
 .footer-section.links ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+.footer-section.links li {
+    margin-bottom: 0.75rem;
 }
 
 .footer-section.links a {
-    color: #adb5bd;
+    color: var(--text-secondary);
     text-decoration: none;
-    display: block;
-    margin-bottom: 0.5rem;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
 }
 
 .footer-section.links a:hover {
-    color: white;
+    color: var(--accent-color);
+    transform: translateX(4px);
+}
+
+/* Contact Section */
+.footer-section.contact span {
+    line-height: 1.7;
+    font-size: 0.95rem;
 }
 
 .footer-section.contact a {
-    color: #61dafb;
+    color: var(--accent-color);
     text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 0.5rem;
+    transition: color 0.2s ease;
 }
 
+.footer-section.contact a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* Footer Bottom */
 .footer-bottom {
-    background-color: #212529;
-    padding: 1rem;
+    background-color: #020617; /* Very dark */
+    padding: 0.75rem 1rem;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #64748b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .footer-section {
+        align-items: center;
+    }
+
+    .footer-section.links a:hover {
+        transform: none; /* Disable shift on mobile */
+    }
 }

@@ -1,32 +1,19 @@
 // client/src/pages/SingleCollectionPage.js
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchCollectionById } from '../api';
 import FileListItem from '../components/FileListItem';
 import Spinner from '../components/Spinner';
+import { useQuery } from '@tanstack/react-query';
 
 const SingleCollectionPage = () => {
     const { collectionId } = useParams();
-    const [collection, setCollection] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const getCollection = async () => {
-            try {
-                setLoading(true);
-                const { data } = await fetchCollectionById(collectionId);
-                setCollection(data);
-                setError(null);
-            } catch (err) {
-                console.error("Failed to fetch collection:", err);
-                setError("Could not load this collection.");
-            } finally {
-                setLoading(false);
-            }
-        };
-        getCollection();
-    }, [collectionId]);
+    const { data: collection, isLoading: loading, error } = useQuery({
+        queryKey: ['collection', collectionId],
+        queryFn: () => fetchCollectionById(collectionId).then(res => res.data),
+        enabled: !!collectionId,
+    });
 
     return (
         <div className="file-list-page">
@@ -36,7 +23,7 @@ const SingleCollectionPage = () => {
             <h1>{collection ? collection.name : 'Loading...'}</h1>
             
             {loading && <Spinner />}
-            {error && <p className="error-message">{error}</p>}
+            {error && <p className="error-message">Could not load this collection.</p>}
 
             {!loading && !error && collection && (
                 collection.files.length > 0 ? (

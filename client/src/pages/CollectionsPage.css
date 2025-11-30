@@ -3,22 +3,30 @@
     display: flex;
     gap: 0.5rem;
     margin-bottom: 2rem;
-    background-color: white;
+    background-color: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
 }
 
 .create-collection-form input {
     flex-grow: 1;
     padding: 0.75rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
 }
 
+.create-collection-form input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
 .create-collection-form button {
-    background-color: #28a745;
+    background-color: var(--accent-color);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -30,7 +38,7 @@
 }
 
 .create-collection-form button:hover {
-    background-color: #218838;
+    background-color: var(--accent-hover);
 }
 
 .collections-grid {
@@ -40,25 +48,58 @@
 }
 
 .collection-card {
-    background-color: white;
+    background-color: var(--bg-secondary);
     border-radius: 8px;
     padding: 1.5rem;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--text-primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .collection-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    border-color: var(--accent-color);
+}
+
+.collection-info {
+    flex-grow: 1;
 }
 
 .collection-card h3 {
     margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
 }
 
 .collection-card p {
     margin: 0;
-    color: #666;
+    color: var(--text-secondary);
+}
+
+.delete-collection-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-collection-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.delete-collection-btn .icon {
+    width: 20px;
+    height: 20px;
 }

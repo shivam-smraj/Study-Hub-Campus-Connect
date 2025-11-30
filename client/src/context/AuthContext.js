@@ -1,7 +1,6 @@
 // client/src/context/AuthContext.js
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { fetchBookmarks, addBookmark as apiAddBookmark, removeBookmark as apiRemoveBookmark, fetchCollections, createCollection, addFileToCollection  } from '../api';
+import { fetchCurrentUser, fetchBookmarks, addBookmark as apiAddBookmark, removeBookmark as apiRemoveBookmark, fetchCollections, createCollection, addFileToCollection  } from '../api';
 
 const AuthContext = createContext();
 
@@ -20,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const { data: user } = await axios.get('/api/auth/current_user');
+        const { data: user } = await fetchCurrentUser();
         setCurrentUser(user);
         if (user) {
           const { data: bookmarks } = await fetchBookmarks();

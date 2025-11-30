@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import './BranchCard.css';
 
 const BranchCard = ({ branch }) => {
-  // We use branch._id for the link, as it's the unique identifier our API needs
   return (
-    <Link to={`/branch/${branch._id}`} className="branch-card">
+    <Link to={`/branch/${branch.slug}`} className="branch-card">
       <h3>{branch.name}</h3>
       <p>({branch.shortName})</p>
     </Link>

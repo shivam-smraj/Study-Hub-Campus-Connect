@@ -1,46 +1,45 @@
 // client/src/pages/SubjectPage.js
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom'; // useParams reads URL parameters
-import { fetchSubjectsByBranch } from '../api';
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { fetchSubjectsByBranch, fetchBranchDetails } from '../api';
 import SubjectCard from '../components/SubjectCard';
 import './SubjectPage.css';
 import Spinner from '../components/Spinner';
+import { useQuery } from '@tanstack/react-query';
+
 const SubjectPage = () => {
-  const { branchId } = useParams(); // Get the branchId from the URL
-  const [subjects, setSubjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { branchSlug } = useParams();
 
-  useEffect(() => {
-    const getSubjects = async () => {
-      try {
-        setLoading(true);
-        const { data } = await fetchSubjectsByBranch(branchId);
-        setSubjects(data);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to fetch subjects:", err);
-        setError("Failed to load subjects. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Fetch branch details to get the name
+  const { data: branch } = useQuery({
+      queryKey: ['branch', branchSlug],
+      queryFn: () => fetchBranchDetails(branchSlug).then(res => res.data),
+      staleTime: 1000 * 60 * 60,
+  });
 
-    getSubjects();
-  }, [branchId]); // This effect re-runs if the branchId in the URL changes
+  const { data: subjects, isLoading: loading, error } = useQuery({
+    queryKey: ['subjects', branchSlug],
+    queryFn: () => fetchSubjectsByBranch(branchSlug).then(res => res.data),
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+  });
 
   return (
     <div className="subject-page">
       <div className="breadcrumb">
-        <Link to="/">Home</Link> / <span>Subjects</span>
+        <Link to="/">Home</Link> / <span>{branch ? branch.name : 'Subjects'}</span>
       </div>
+      <h1>{branch ? branch.name : 'Loading...'}</h1>
       {loading && <Spinner />}
-      {/* {loading && <p>Loading subjects...</p>} */}
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+          <div className="error-message">
+              <p>Failed to load subjects.</p>
+              <p className="error-details">{error.message || 'Unknown error'}</p>
+          </div>
+      )}
       
       {!loading && !error && (
         <div className="subject-grid">
-          {subjects.map((subject) => (
+          {subjects?.map((subject) => (
             <SubjectCard key={subject._id} subject={subject} />
           ))}
         </div>

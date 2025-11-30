@@ -14,6 +14,9 @@ const AdminDashboardPage = () => {
                     <Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>
                         Dashboard
                     </Link>
+                    <Link to="/admin/users" className={location.pathname.includes('/admin/users') ? 'active' : ''}>
+                        Manage Users
+                    </Link>
                     <Link to="/admin/branches" className={location.pathname.includes('/admin/branches') ? 'active' : ''}>
                         Manage Branches
                     </Link>
@@ -21,7 +24,7 @@ const AdminDashboardPage = () => {
                         Manage Subjects
                     </Link>
                     <Link to="/admin/upload" className={location.pathname.includes('/admin/upload') ? 'active' : ''}>
-                        Upload Files
+                        Manage Files
                     </Link>
                 </nav>
             </aside>
