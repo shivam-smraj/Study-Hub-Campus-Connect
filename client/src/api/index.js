@@ -6,9 +6,9 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 // Use explicit URL in development to avoid proxy issues
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
+const API_BASE_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' 
   ? '/api' 
-  : 'http://localhost:5000/api';
+  : 'http://localhost:5000/api');
 
 const API = axios.create({ baseURL: API_BASE_URL });
 
