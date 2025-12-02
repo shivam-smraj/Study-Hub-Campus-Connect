@@ -33,6 +33,8 @@ const FileListItem = ({ file }) => {
   }, [file._id]);
 
   const handleLike = async () => {
+    if (file.isStatic) return; // Disable likes for static files
+
     const likedFiles = JSON.parse(localStorage.getItem('likedFiles')) || [];
 
     if (isLiked) {
@@ -66,6 +68,7 @@ const FileListItem = ({ file }) => {
   };
 
   const handleBookmark = () => {
+    if (file.isStatic) return; // Disable bookmarks for static files
     if (isBookmarked(file._id)) {
       removeBookmark(file._id);
     } else {
@@ -73,34 +76,37 @@ const FileListItem = ({ file }) => {
     }
   };
 
-  const viewerUrl = `https://drive.google.com/file/d/${file.driveFileId}/view?usp=sharing`;
+  const viewerUrl = file.isStatic ? file.fileUrl : `https://drive.google.com/file/d/${file.driveFileId}/view?usp=sharing`;
   const isViewable = ['PDF', 'PPTX', 'DOCX'].includes(file.fileType.toUpperCase());
 
   return (
     <div className="file-list-item">
-      <div className="file-main">
-        <div className="file-icon-wrapper">
-          {getFileIcon(file.fileType)}
+      <a href={viewerUrl} target="_blank" rel="noopener noreferrer" className="file-main-link">
+        <div className="file-main">
+          <div className="file-icon-wrapper">
+            {getFileIcon(file.fileType)}
+          </div>
+          <div className="file-details">
+            <span className="file-name" title={file.fileName}>{file.fileName}</span>
+          </div>
         </div>
-        <div className="file-details">
-          <span className="file-name" title={file.fileName}>{file.fileName}</span>
-          <span className="file-meta-mobile">{file.fileSize}</span>
-        </div>
-      </div>
+      </a>
 
       <div className="file-actions">
         <span className="file-size-desktop">{file.fileSize}</span>
         
-        <button 
-          onClick={handleLike} 
-          className={`action-btn like-btn ${isLiked ? 'active' : ''}`}
-          title={isLiked ? "Unlike" : "Like"}
-        >
-          <HeartIcon className="icon" filled={isLiked} />
-          <span className="count">{likes}</span>
-        </button>
+        {!file.isStatic && (
+          <button 
+            onClick={handleLike} 
+            className={`action-btn like-btn ${isLiked ? 'active' : ''}`}
+            title={isLiked ? "Unlike" : "Like"}
+          >
+            <HeartIcon className="icon" filled={isLiked} />
+            <span className="count">{likes}</span>
+          </button>
+        )}
 
-        {currentUser && (
+        {currentUser && !file.isStatic && (
             <>
                 <div className="collection-wrapper">
                   <AddToCollection fileId={file._id} minimal={true} />
@@ -115,7 +121,7 @@ const FileListItem = ({ file }) => {
             </>
         )}
 
-        {isViewable && (
+        {isViewable && !file.isStatic && (
           <a href={viewerUrl} target="_blank" rel="noopener noreferrer" className="action-btn view-btn" title="View File">
             <EyeIcon className="icon" />
           </a>

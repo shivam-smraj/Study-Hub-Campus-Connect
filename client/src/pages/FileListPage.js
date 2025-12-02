@@ -5,6 +5,7 @@ import { fetchFilesBySubject, fetchSubjectDetails } from '../api';
 import Accordion from '../components/Accordion';
 import Spinner from '../components/Spinner';
 import { useQuery } from '@tanstack/react-query';
+import pyqData from '../data/pyq-data.json';
 
 const FileListPage = () => {
   const { subjectSlug } = useParams();
@@ -19,9 +20,19 @@ const FileListPage = () => {
   const { data: groupedFiles, isLoading: loading, error } = useQuery({
     queryKey: ['files', subjectSlug],
     queryFn: async () => {
-      const { data } = await fetchFilesBySubject(subjectSlug);
+      let apiFiles = [];
+      try {
+        const { data } = await fetchFilesBySubject(subjectSlug);
+        apiFiles = data;
+      } catch (err) {
+        console.warn("Could not fetch files from API", err);
+      }
+
+      const staticFiles = pyqData[subjectSlug] || [];
+      const allFiles = [...apiFiles, ...staticFiles];
+
       // Grouping logic
-      return data.reduce((acc, file) => {
+      return allFiles.reduce((acc, file) => {
         const pathParts = file.relativePath.split('/');
         const subfolderPath = pathParts.slice(1, -1).join('/') || 'Root';
         if (!acc[subfolderPath]) {
