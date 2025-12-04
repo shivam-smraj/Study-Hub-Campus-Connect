@@ -3,7 +3,7 @@ const path = require('path');
 const slugify = require('slugify');
 
 const questionPapersDir = path.join(__dirname, '../public/question-papers');
-const outputFile = path.join(__dirname, '../src/data/pyq-data.json');
+const outputFile = path.join(__dirname, '../public/pyq-data.json');
 
 const pyqData = {};
 

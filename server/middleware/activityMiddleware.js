@@ -30,29 +30,37 @@ const trackActivity = async (req, res, next) => {
       updateData.userId = req.user._id;
     }
 
-    // Use upsert to create or update
-    await Visitor.findOneAndUpdate(
-      { visitorId: visitorId },
-      updateData,
-      { upsert: true, new: true, setDefaultsOnInsert: true }
-    );
+    // Run DB updates in background (Fire-and-Forget)
+    // We do NOT await this, so the response is sent immediately
+    (async () => {
+      try {
+        // Use upsert to create or update
+        await Visitor.findOneAndUpdate(
+          { visitorId: visitorId },
+          updateData,
+          { upsert: true, new: true, setDefaultsOnInsert: true }
+        );
 
-    // 3. Update Daily Stats (Historical & Counts)
-    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-    
-    await DailyStat.findOneAndUpdate(
-        { date: today },
-        { 
-            $inc: { views: 1 },
-            $addToSet: { visitorIds: visitorId }
-        },
-        { upsert: true }
-    );
+        // 3. Update Daily Stats (Historical & Counts)
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        
+        await DailyStat.findOneAndUpdate(
+            { date: today },
+            { 
+                $inc: { views: 1 },
+                $addToSet: { visitorIds: visitorId }
+            },
+            { upsert: true }
+        );
 
-    // 4. Update Registered User Record (if logged in)
-    if (req.user) {
-      await User.findByIdAndUpdate(req.user._id, { lastActive: new Date() }, { timestamps: false });
-    }
+        // 4. Update Registered User Record (if logged in)
+        if (req.user) {
+          await User.findByIdAndUpdate(req.user._id, { lastActive: new Date() }, { timestamps: false });
+        }
+      } catch (bgError) {
+        console.error('Background analytics error:', bgError);
+      }
+    })();
 
   } catch (err) {
     console.error('Error tracking activity:', err);

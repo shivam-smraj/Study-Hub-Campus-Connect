@@ -1,11 +1,10 @@
 // client/src/pages/FileListPage.js
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchFilesBySubject, fetchSubjectDetails } from '../api';
 import Accordion from '../components/Accordion';
 import Spinner from '../components/Spinner';
 import { useQuery } from '@tanstack/react-query';
-import pyqData from '../data/pyq-data.json';
 
 const FileListPage = () => {
   const { subjectSlug } = useParams();
@@ -17,33 +16,34 @@ const FileListPage = () => {
       staleTime: 1000 * 60 * 60,
   });
 
-  const { data: groupedFiles, isLoading: loading, error } = useQuery({
-    queryKey: ['files', subjectSlug],
-    queryFn: async () => {
-      let apiFiles = [];
-      try {
-        const { data } = await fetchFilesBySubject(subjectSlug);
-        apiFiles = data;
-      } catch (err) {
-        console.warn("Could not fetch files from API", err);
-      }
-
-      const staticFiles = pyqData[subjectSlug] || [];
-      const allFiles = [...apiFiles, ...staticFiles];
-
-      // Grouping logic
-      return allFiles.reduce((acc, file) => {
-        const pathParts = file.relativePath.split('/');
-        const subfolderPath = pathParts.slice(1, -1).join('/') || 'Root';
-        if (!acc[subfolderPath]) {
-          acc[subfolderPath] = [];
-        }
-        acc[subfolderPath].push(file);
-        return acc;
-      }, {});
-    },
-    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+  // Fetch API Files
+  const { data: apiFiles = [], isLoading: loading, error } = useQuery({
+    queryKey: ['apiFiles', subjectSlug],
+    queryFn: () => fetchFilesBySubject(subjectSlug).then(res => res.data),
+    staleTime: 1000 * 60 * 5,
   });
+
+  // Fetch Static Files
+  const { data: allStaticData = {} } = useQuery({
+    queryKey: ['staticFiles'],
+    queryFn: () => fetch('/pyq-data.json').then(res => res.json()),
+    staleTime: 1000 * 60 * 60,
+  });
+
+  const groupedFiles = useMemo(() => {
+    const staticFiles = allStaticData[subjectSlug] || [];
+    const allFiles = [...apiFiles, ...staticFiles];
+
+    return allFiles.reduce((acc, file) => {
+      const pathParts = file.relativePath.split('/');
+      const subfolderPath = pathParts.slice(1, -1).join('/') || 'Root';
+      if (!acc[subfolderPath]) {
+        acc[subfolderPath] = [];
+      }
+      acc[subfolderPath].push(file);
+      return acc;
+    }, {});
+  }, [apiFiles, allStaticData, subjectSlug]);
 
   return (
     <div className="file-list-page">

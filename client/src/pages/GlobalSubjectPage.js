@@ -5,7 +5,6 @@ import { fetchGlobalSubjects, fetchFilesBySubject } from '../api';
 import Accordion from '../components/Accordion';
 import Spinner from '../components/Spinner';
 import { useQuery } from '@tanstack/react-query';
-import pyqData from '../data/pyq-data.json';
 import './GlobalSubjectPage.css';
 
 // Helper function to process and group files (same as in FileListPage)
@@ -37,6 +36,13 @@ const GlobalSubjectPage = () => {
     queryKey: ['globalFiles', pageType],
     queryFn: async () => {
         if (pageType === 'question-papers') {
+            // Fetch the static JSON file
+            const response = await fetch('/pyq-data.json');
+            if (!response.ok) {
+                throw new Error('Failed to load question papers data');
+            }
+            const pyqData = await response.json();
+
             // Group all static files by Subject Name
             const allFiles = Object.values(pyqData).flat();
             return allFiles.reduce((acc, file) => {

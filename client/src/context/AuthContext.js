@@ -1,6 +1,7 @@
 // client/src/context/AuthContext.js
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { fetchCurrentUser, fetchBookmarks, addBookmark as apiAddBookmark, removeBookmark as apiRemoveBookmark, fetchCollections, createCollection, addFileToCollection  } from '../api';
+import Spinner from '../components/Spinner';
 
 const AuthContext = createContext();
 
@@ -104,9 +105,17 @@ export const AuthProvider = ({ children }) => {
     addFileToExistingCollection
   };
 
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
