@@ -9,7 +9,8 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   image: { type: String },
   collections: [{ type: Schema.Types.ObjectId, ref: 'Collection' }],
-  bookmarkedFiles: [{ type: Schema.Types.ObjectId, ref: 'File' }]
+  bookmarkedFiles: [{ type: Schema.Types.ObjectId, ref: 'File' }],
+  lastActive: { type: Date }
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

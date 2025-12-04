@@ -11,6 +11,7 @@ const session = require('express-session');
 const passport = require('passport'); 
 const MongoStore = require('connect-mongo'); 
 const cookieParser = require('cookie-parser'); 
+const trackActivity = require('./middleware/activityMiddleware');
 
 const authRoutes = require('./routes/authRoutes'); 
 const userRoutes = require('./routes/userRoutes');
@@ -46,7 +47,7 @@ app.use('/api', limiter);
 app.use(express.json());
 
 app.use(cors({
-  origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
+  origin: [process.env.CLIENT_URL, 'http://localhost:3000', 'https://iiestians.tech','https://www.iiestians.tech'],
   credentials: true
 }));
 app.use(cookieParser());
@@ -68,6 +69,9 @@ app.use(
 // --- PASSPORT MIDDLEWARE ---
 app.use(passport.initialize());
 app.use(passport.session());
+
+// --- ACTIVITY TRACKING ---
+app.use(trackActivity);
 
 // --- MOUNT ROUTERS ---
 app.use('/api', dataRoutes);

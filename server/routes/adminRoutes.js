@@ -5,8 +5,9 @@ const { isLoggedIn, isAdmin } = require('../middleware/authMiddleware');
 const Branch = require('../models/Branch');
 const Subject = require('../models/Subject');
 const File = require('../models/File');
-
 const User = require('../models/User');
+const Visitor = require('../models/Visitor');
+const DailyStat = require('../models/DailyStat');
 
 // @desc    A test route to check admin access
 // @route   GET /api/admin/check
@@ -23,11 +24,44 @@ router.get('/stats', isLoggedIn, isAdmin, async (req, res) => {
         const subjectCount = await Subject.countDocuments();
         const branchCount = await Branch.countDocuments();
 
+        // Analytics
+        const now = new Date();
+        const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
+        const todayStr = new Date().toISOString().split('T')[0];
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+        // 1. Active Now (Unique Visitors in last 5 mins)
+        const activeUsers = await Visitor.countDocuments({ lastActive: { $gte: fiveMinutesAgo } });
+
+        // 2. Today's Stats (From DailyStat)
+        const todayStats = await DailyStat.findOne({ date: todayStr });
+        const dailyViews = todayStats ? todayStats.views : 0;
+        const dailyVisitors = todayStats ? todayStats.visitorIds.length : 0;
+
+        // 3. Monthly Stats
+        // Monthly Unique Visitors (from Visitor collection - best for MAU)
+        const monthlyVisitors = await Visitor.countDocuments({ lastActive: { $gte: monthStart } });
+        
+        // Monthly Views (Aggregate from DailyStat)
+        const monthStartStr = monthStart.toISOString().split('T')[0];
+        const monthlyViewsAgg = await DailyStat.aggregate([
+            { $match: { date: { $gte: monthStartStr } } },
+            { $group: { _id: null, totalViews: { $sum: "$views" } } }
+        ]);
+        const monthlyViews = monthlyViewsAgg.length > 0 ? monthlyViewsAgg[0].totalViews : 0;
+
         res.json({
             users: userCount,
             files: fileCount,
             subjects: subjectCount,
-            branches: branchCount
+            branches: branchCount,
+            analytics: {
+                activeUsers,
+                dailyViews,
+                dailyVisitors,
+                monthlyViews,
+                monthlyVisitors
+            }
         });
     } catch (err) {
         console.error(err);

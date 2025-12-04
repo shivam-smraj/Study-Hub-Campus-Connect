@@ -1,5 +1,5 @@
 // client/src/components/Header.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Header.css';
@@ -13,6 +13,8 @@ const Header = () => {
   const { currentUser } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navRef = useRef(null);
+  const hamburgerRef = useRef(null);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -22,15 +24,20 @@ const Header = () => {
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const nav = document.querySelector('.main-nav');
-      const hamburger = document.querySelector('.hamburger');
-      if (isMenuOpen && nav && !nav.contains(event.target) && !hamburger.contains(event.target)) {
+      // If menu is open, and click is NOT inside nav AND NOT inside hamburger button
+      if (
+        isMenuOpen && 
+        navRef.current && 
+        !navRef.current.contains(event.target) && 
+        hamburgerRef.current && 
+        !hamburgerRef.current.contains(event.target)
+      ) {
         setIsMenuOpen(false);
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen]);
 
   const API_URL = process.env.REACT_APP_API_URL 
@@ -45,12 +52,20 @@ const Header = () => {
         </Link>
 
         {/* Mobile Menu Toggle */}
-        <button className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+        <button 
+          ref={hamburgerRef}
+          className="hamburger" 
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMenuOpen(!isMenuOpen);
+          }} 
+          aria-label="Toggle menu"
+        >
           {isMenuOpen ? <CloseIcon className="icon" /> : <MenuIcon className="icon" />}
         </button>
 
         {/* Navigation Menu */}
-        <nav className={`main-nav ${isMenuOpen ? 'open' : ''}`}>
+        <nav ref={navRef} className={`main-nav ${isMenuOpen ? 'open' : ''}`}>
           <div className="nav-links">
             {currentUser && (
               <>

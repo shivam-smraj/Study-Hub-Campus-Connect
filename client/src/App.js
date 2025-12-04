@@ -23,6 +23,7 @@ import Footer from './components/Footer';
 import AboutPage from './pages/AboutPage';
 import ScrollToTop from './components/ScrollToTop';
 import SyllabusViewer from './components/SyllabusViewer';
+import { Analytics } from "@vercel/analytics/react";
 
 
 
@@ -61,6 +62,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <Analytics />
       </div>
     </Router>
   );
